@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="login.css">
+
+    <title>SignUp</title>
+
+</head>
+    
+    
+<body>
+   <div class="box">
+    <div class="container">
+
+        <div class="top">
+            <span>Need an account?</span>
+            <header>Sign Up</header>
+        </div>
+
+        <div class="input-field">
+            <input type="text" class="input" placeholder="name" id="username" required>
+            <img src="../../imgs/user.png">
+        </div>
+
+        <div class="input-field">
+            <input type="email" class="input" placeholder="Email ID" id="email" required>
+            <img src="../../imgs/email.png">
+        </div>
+
+        <div class="input-field">
+            <input type="Password" class="input" placeholder="Password" id="password" required>
+            <img src="../../imgs/padlock.png">
+        </div>
+
+        <div class="input-field">
+            <input type="submit" class="submit" value="SignUp" id="signup">
+        </div>
+
+        <div class="two">
+                <label><a href="#">Forgot password?</a></label>
+            </div>
+        </div>
+    </div>
+</div>  
+</body>
+
+
+<script type="module">
+
+    // Import the functions you need from the SDKs you need
+    
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+	  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification,signOut } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";  
+          // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+    
+      // Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyBDrJVvkwsmdLVm8Fv9wC-JG-A9O31ScJ8",
+  authDomain: "tryyy-5a8aa.firebaseapp.com",
+  projectId: "tryyy-5a8aa",
+  storageBucket: "tryyy-5a8aa.appspot.com",
+  messagingSenderId: "1054198685681",
+  appId: "1:1054198685681:web:3f2dbf042b60fa9d90ae50"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+        const auth = getAuth();
+      
+        document.getElementById("signup").addEventListener('click',() => {
+      
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+        var username = document.getElementById('username').value;
+      
+            if (username.trim() == "") {
+                alert("Enter Name");
+            }else if (email.trim() == "") {
+                alert("Enter Email");
+            } else if (password.trim().length < 6) {
+                alert("Password must be at least 6 characters");
+
+            } else {
+        createUserWithEmailAndPassword(auth, email, password)
+          .then((userCredential) => {
+           // Signed in 
+            const user = userCredential.user;
+      
+      
+            alert('user created!');
+            // ...
+            sendEmailVerification(user)
+      .then(() => {
+        alert("Verification Email sent");
+      });
+    
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+      
+            alert(errorMessage);
+          // ..
+          });
+        }
+      });
+    </script>  
+
+</html>
