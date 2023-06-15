@@ -1,5 +1,7 @@
 # Twitter-Sentiment-Analyzer
 
+A Docker application made using Python(Flask) and React. In this application an user can search anything of his own intrest. The twitter api featches and provides with the tweets according to the search term. The fetched tweets are analysed using ML model. Few Tweets and overall analysed sentiment(in form of Pie Chart) are displayed to the user.    
+
 ## Prerequisites 
 1. Docker 
 2. Node Js
